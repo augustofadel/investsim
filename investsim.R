@@ -110,5 +110,5 @@ if(length(new.packages)) {
 }
 lapply(packages.list, require, character.only = TRUE)
 
-# dat <- check_planilha('investsim', 'investsim')
-dat <- check_planilha('investsim', 'teste')
+dat <- check_planilha('investsim', 'investsim')
+# dat <- check_planilha('investsim', 'teste')
