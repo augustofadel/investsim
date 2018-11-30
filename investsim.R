@@ -34,8 +34,8 @@ check_planilha <-
          ) %>% 
          mutate(data_hora = as_datetime(data_hora))
       
-      atu <- row.names(dat)[dat$status == 'aberta'][1]
-      # atu <- 1
+      # atu <- row.names(dat)[dat$status == 'aberta'][1]
+      atu <- 1
       
       consulta <- 
          dat %>% 
