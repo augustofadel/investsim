@@ -7,7 +7,7 @@ check <-
    ) {
       status <- 
          tryCatch({
-            dat <- getQuote(cod)
+            dat <- getQuote(ativo)
             if (
                (operacao %in% c('compra', 'stop') & dat$Last <= valor) |
                (operacao == 'venda' & dat$Last >= valor)
@@ -25,7 +25,6 @@ check <-
 check_planilha <- 
    function(planilha, aba) {
       gap <- gs_title(planilha)
-      gs_ws_ls(gap)
       
       dat <- 
          gap %>%
@@ -36,6 +35,7 @@ check_planilha <-
          mutate(data_hora = as_datetime(data_hora))
       
       atu <- row.names(dat)[dat$status == 'aberta'][1]
+      # atu <- 1
       
       consulta <- 
          dat %>% 
@@ -70,28 +70,28 @@ check_planilha <-
       
       if (!is.na(atu)) {
          atu <- as.numeric(atu)
-         
+
          gs_edit_cells(
             gap,
             ws = aba,
             input = dat$data_hora[atu:nrow(dat)],
             anchor = paste0('B', atu + 1)
          )
-         
+
          gs_edit_cells(
             gap,
             ws = aba,
             input = dat$status[atu:nrow(dat)],
             anchor = paste0('G', atu + 1)
          )
-         
+
          gs_edit_cells(
             gap,
             ws = aba,
             input = dat$movimentacao[atu:nrow(dat)],
             anchor = paste0('H', atu + 1)
          )
-         
+
          gs_edit_cells(
             gap,
             ws = aba,
@@ -110,4 +110,5 @@ if(length(new.packages)) {
 }
 lapply(packages.list, require, character.only = TRUE)
 
-dat <- check_planilha('investsim', 'investsim')
+# dat <- check_planilha('investsim', 'investsim')
+dat <- check_planilha('investsim', 'teste')
