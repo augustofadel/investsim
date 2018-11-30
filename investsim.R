@@ -109,6 +109,5 @@ if(length(new.packages)) {
    install.packages(new.packages, repos = 'https://cran.fiocruz.br/')
 }
 lapply(packages.list, require, character.only = TRUE)
-
+gs_auth(token = 'googlesheets_token.rds')
 dat <- check_planilha('investsim', 'investsim')
-# dat <- check_planilha('investsim', 'teste')
