@@ -62,12 +62,11 @@ check_planilha <-
       dat[dat$operacao %in% c('venda', 'stop') & dat$status == 'executada', 'movimentacao'] <- 
          dat$qtd[dat$operacao %in% c('venda', 'stop') & dat$status == 'executada'] * dat$valor[dat$operacao %in% c('venda', 'stop') & dat$status == 'executada']
       
-      dat$balanco_op <- 
+      dat[dat$operacao == 'compra', 'balanco_op'] <- 
          dat %>% 
          group_by(id) %>% 
          summarise(balanco_op = sum(movimentacao, na.rm = T)) %>% 
-         pull(balanco_op) %>% 
-         rep(dat %>% split(dat$id) %>% map_int(nrow))
+         pull(balanco_op)
       
       if (!is.na(atu)) {
          atu <- as.numeric(atu)
